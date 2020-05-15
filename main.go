@@ -40,7 +40,7 @@ func main() {
 	pass, err := ioutil.ReadFile(*dbAuthFile)
 	error.Check(err)
 	
-        connectionString = fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=verify-full", *dbUser, strings.TrimSpace(string(pass)), *dbHostname,*db)
+        connectionString = fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", *dbUser, strings.TrimSpace(string(pass)), *dbHostname,*db)
 	
 	collector := bareosCollector()
 	prometheus.MustRegister(collector)
