@@ -19,11 +19,11 @@ var connectionString string
 var (
 	exporterPort     = flag.Int("port", 9625, "Bareos exporter port")
 	exporterEndpoint = flag.String("endpoint", "/metrics", "Bareos exporter endpoint")
-	mysqlUser        = flag.String("u", "root", "Bareos MySQL username")
-	mysqlAuthFile    = flag.String("p", "./auth", "MySQL password file path")
-	mysqlHostname    = flag.String("h", "127.0.0.1", "MySQL hostname")
-	mysqlPort        = flag.String("P", "3306", "MySQL port")
-	mysqlDb          = flag.String("db", "bareos", "MySQL database name")
+	mysqlUser        = flag.String("u", "postgres", "Bareos Postgres username")
+	mysqlAuthFile    = flag.String("p", "./auth", "Postgres password file path")
+	mysqlHostname    = flag.String("h", "127.0.0.1", "Postgres hostname")
+	mysqlPort        = flag.String("P", "5432", "Postgres port")
+	mysqlDb          = flag.String("db", "bareos_catalog", "Postgres database name")
 )
 
 func init() {
