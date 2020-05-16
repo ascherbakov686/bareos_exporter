@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/dreyau/bareos_exporter/error"
+	"./error"
 
 	"flag"
 	"fmt"
@@ -21,7 +21,7 @@ var (
 	exporterEndpoint = flag.String("endpoint", "/metrics", "Bareos exporter endpoint")
 	dbUser        = flag.String("u", "postgres", "Bareos Postgres username")
 	dbAuthFile    = flag.String("p", "./auth", "Postgres password file path")
-	dbHostname    = flag.String("h", "127.0.0.1", "Postgres hostname")
+	dbHostname    = flag.String("h", "localhost", "Postgres hostname")
 	dbPort        = flag.String("P", "5432", "Postgres port")
 	db            = flag.String("db", "bareos", "Postgres database name")
 )
@@ -39,9 +39,9 @@ func main() {
 
 	pass, err := ioutil.ReadFile(*dbAuthFile)
 	error.Check(err)
-	
-        connectionString = fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", *dbUser, strings.TrimSpace(string(pass)), *dbHostname,*db)
-	
+
+	connectionString = fmt.Sprintf("postgres://%s:%s@%s:%s/%s?sslmode=disable",*dbUser,strings.TrimSpace(string(pass)),*dbHostname,*dbPort,*db)
+
 	collector := bareosCollector()
 	prometheus.MustRegister(collector)
 
